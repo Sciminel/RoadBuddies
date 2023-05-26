@@ -13,6 +13,10 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+# Fichiers de configuration spécifiques à l'environnement
+application.properties
+application.yml
+
 # Spring Boot artifact
 *.jar
 *.war
