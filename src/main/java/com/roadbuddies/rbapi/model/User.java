@@ -1,5 +1,6 @@
 package com.roadbuddies.rbapi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -14,13 +15,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
+// @JsonIgnoreProperties({"hibernateLazyInitializer"})
+// Lors de l'ajout de l'annotation au dessus, ca me retire mon erreur de proxy hibernate...(Voir dans la classe UserServiceImpl)
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 	
 	@NotNull
@@ -39,6 +51,7 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
+	@JsonIgnore
 	@NotNull
 	@Column(name = "password")
 	private String password;
@@ -51,28 +64,35 @@ public class User {
 	@Column(name = "phone_number")
 	private Integer phoneNumber;
 	
+	@JsonIgnore
     @OneToOne(mappedBy = "user_fk")
     private Car car;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user_fk")
     private List<Trip> trips;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user_fk")
     private List<Booking> bookings;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sender_fk")
-    private List<Message> sentMessages;
+    private List<Message> sendMessages;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "recipient_fk")
     private List<Message> receivedMessages;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user_fk")
     private List<Review> reviews;
 
+    
+    
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -132,6 +152,54 @@ public class User {
 
 	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<Message> getSendMessages() {
+		return sendMessages;
+	}
+
+	public void setSendMessages(List<Message> sendMessages) {
+		this.sendMessages = sendMessages;
+	}
+
+	public List<Message> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	@Override

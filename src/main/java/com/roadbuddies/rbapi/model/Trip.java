@@ -1,6 +1,7 @@
 package com.roadbuddies.rbapi.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -44,6 +46,12 @@ public class Trip {
 	
 	@NotNull
 	private Integer price;
+	
+	@OneToMany(mappedBy = "trip_fk")
+	private List<Booking> bookings;
+	
+    @OneToMany(mappedBy = "trip_fk")
+    private List<Review> reviews;
 	
 	@NotNull
 	@ManyToOne
@@ -112,6 +120,24 @@ public class Trip {
 
 	public void setUser_fk(User user_fk) {
 		this.user_fk = user_fk;
+	}
+	
+	
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	@Override

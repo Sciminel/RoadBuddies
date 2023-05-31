@@ -111,9 +111,8 @@ public class Car {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-
-
+	
+	
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", year=" + year + ", license=" + license
