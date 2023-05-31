@@ -35,8 +35,8 @@ public class Review {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "user_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_review"))
-	private User user_fk;
+	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_review"))
+	private Account account_fk;
 	
 	@NotNull
 	@ManyToOne
@@ -75,12 +75,12 @@ public class Review {
 		this.dateTimeReview = dateTimeReview;
 	}
 
-	public User getUser_fk() {
-		return user_fk;
+	public Account getUser_fk() {
+		return account_fk;
 	}
 
-	public void setUser_fk(User user_fk) {
-		this.user_fk = user_fk;
+	public void setUser_fk(Account account_fk) {
+		this.account_fk = account_fk;
 	}
 
 	public Trip getTrip_fk() {
@@ -94,12 +94,12 @@ public class Review {
 	@Override
 	public String toString() {
 		return "Review [id=" + id + ", rating=" + rating + ", content=" + content + ", dateTimeReview=" + dateTimeReview
-				+ ", user_fk=" + user_fk + ", trip_fk=" + trip_fk + "]";
+				+ ", user_fk=" + account_fk + ", trip_fk=" + trip_fk + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(content, dateTimeReview, id, rating, trip_fk, user_fk);
+		return Objects.hash(content, dateTimeReview, id, rating, trip_fk, account_fk);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class Review {
 		Review other = (Review) obj;
 		return Objects.equals(content, other.content) && Objects.equals(dateTimeReview, other.dateTimeReview)
 				&& Objects.equals(id, other.id) && Objects.equals(rating, other.rating)
-				&& Objects.equals(trip_fk, other.trip_fk) && Objects.equals(user_fk, other.user_fk);
+				&& Objects.equals(trip_fk, other.trip_fk) && Objects.equals(account_fk, other.account_fk);
 	}
 	
 	

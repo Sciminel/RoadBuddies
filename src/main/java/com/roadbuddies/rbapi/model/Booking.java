@@ -35,8 +35,8 @@ public class Booking {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "user_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_booking"))
-	private User user_fk;
+	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_booking"))
+	private Account account_fk;
 	
 	@NotNull
 	@ManyToOne
@@ -75,12 +75,12 @@ public class Booking {
 		this.numOfPax = numOfPax;
 	}
 
-	public User getUser_fk() {
-		return user_fk;
+	public Account getUser_fk() {
+		return account_fk;
 	}
 
-	public void setUser_fk(User user_fk) {
-		this.user_fk = user_fk;
+	public void setUser_fk(Account user_fk) {
+		this.account_fk = user_fk;
 	}
 
 	public Trip getTrip_fk() {
@@ -94,12 +94,12 @@ public class Booking {
 	@Override
 	public String toString() {
 		return "Booking [id=" + id + ", content=" + content + ", bookingDate=" + bookingDate + ", numOfPax=" + numOfPax
-				+ ", user_fk=" + user_fk + ", trip_fk=" + trip_fk + "]";
+				+ ", user_fk=" + account_fk + ", trip_fk=" + trip_fk + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bookingDate, content, id, numOfPax, trip_fk, user_fk);
+		return Objects.hash(bookingDate, content, id, numOfPax, trip_fk, account_fk);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class Booking {
 		Booking other = (Booking) obj;
 		return Objects.equals(bookingDate, other.bookingDate) && Objects.equals(content, other.content)
 				&& Objects.equals(id, other.id) && Objects.equals(numOfPax, other.numOfPax)
-				&& Objects.equals(trip_fk, other.trip_fk) && Objects.equals(user_fk, other.user_fk);
+				&& Objects.equals(trip_fk, other.trip_fk) && Objects.equals(account_fk, other.account_fk);
 	}
 	
 	

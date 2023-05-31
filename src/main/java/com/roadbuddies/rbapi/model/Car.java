@@ -44,8 +44,8 @@ public class Car {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "user_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_car"))
-	private User user_fk;
+	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_car"))
+	private Account account_fk;
 	
 	public Long getId() {
 		return id;
@@ -80,12 +80,12 @@ public class Car {
 		this.year = year;
 	}
 
-	public User getUser_fk() {
-		return user_fk;
+	public Account getUser_fk() {
+		return account_fk;
 	}
 
-	public void setUser_fk(User user_fk) {
-		this.user_fk = user_fk;
+	public void setUser_fk(Account user_fk) {
+		this.account_fk = user_fk;
 	}
 
 	public String getLicense() {
@@ -116,7 +116,7 @@ public class Car {
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", year=" + year + ", license=" + license
-				+ ", plate=" + plate + ", color=" + color + ", user_fk=" + user_fk + "]";
+				+ ", plate=" + plate + ", color=" + color + ", user_fk=" + account_fk + "]";
 	}
 
 	@Override

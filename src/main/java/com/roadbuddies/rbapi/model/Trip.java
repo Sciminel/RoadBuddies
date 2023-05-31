@@ -55,8 +55,8 @@ public class Trip {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "user_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_trip"))
-	private User user_fk;
+	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_trip"))
+	private Account account_fk;
 
 	public Long getId() {
 		return id;
@@ -114,12 +114,12 @@ public class Trip {
 		this.price = price;
 	}
 
-	public User getUser_fk() {
-		return user_fk;
+	public Account getUser_fk() {
+		return account_fk;
 	}
 
-	public void setUser_fk(User user_fk) {
-		this.user_fk = user_fk;
+	public void setUser_fk(Account user_fk) {
+		this.account_fk = user_fk;
 	}
 	
 	
@@ -144,13 +144,13 @@ public class Trip {
 	public String toString() {
 		return "Trip [id=" + id + ", departureCity=" + departureCity + ", destinationCity=" + destinationCity
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", availableSeats="
-				+ availableSeats + ", price=" + price + ", user_fk=" + user_fk + "]";
+				+ availableSeats + ", price=" + price + ", user_fk=" + account_fk + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(arrivalTime, availableSeats, departureCity, departureTime, destinationCity, id, price,
-				user_fk);
+				account_fk);
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class Trip {
 				&& Objects.equals(departureCity, other.departureCity)
 				&& Objects.equals(departureTime, other.departureTime)
 				&& Objects.equals(destinationCity, other.destinationCity) && Objects.equals(id, other.id)
-				&& Objects.equals(price, other.price) && Objects.equals(user_fk, other.user_fk);
+				&& Objects.equals(price, other.price) && Objects.equals(account_fk, other.account_fk);
 	}
 	
 	

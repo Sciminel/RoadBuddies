@@ -31,13 +31,13 @@ public class Message {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "sender_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_message_sender"))
-	private User sender_fk;
+	@JoinColumn(name = "sender_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_message_sender"))
+	private Account sender_fk;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "recipient_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_message_recipient"))
-	private User recipient_fk;
+	@JoinColumn(name = "recipient_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_message_recipient"))
+	private Account recipient_fk;
 
 	public Long getId() {
 		return id;
@@ -63,19 +63,19 @@ public class Message {
 		this.dateTimeMessage = dateTimeMessage;
 	}
 
-	public User getSender_fk() {
+	public Account getSender_fk() {
 		return sender_fk;
 	}
 
-	public void setSender_fk(User sender_fk) {
+	public void setSender_fk(Account sender_fk) {
 		this.sender_fk = sender_fk;
 	}
 
-	public User getRecipient_fk() {
+	public Account getRecipient_fk() {
 		return recipient_fk;
 	}
 
-	public void setRecipient_fk(User recipient_fk) {
+	public void setRecipient_fk(Account recipient_fk) {
 		this.recipient_fk = recipient_fk;
 	}
 

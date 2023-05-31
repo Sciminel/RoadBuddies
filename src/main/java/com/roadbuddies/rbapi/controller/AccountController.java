@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roadbuddies.rbapi.model.User;
-import com.roadbuddies.rbapi.service.UserService;
+import com.roadbuddies.rbapi.model.Account;
+import com.roadbuddies.rbapi.service.AccountService;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class AccountController {
 
 	@Autowired
-	private UserService userService;
+	private AccountService userService;
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public User getUserById (@PathVariable Long id) {
+	public Account getUserById (@PathVariable Long id) {
 		
-		return userService.getUserById(id);
+		return userService.getAccountById(id);
 	}
 	
 	

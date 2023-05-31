@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 // @JsonIgnoreProperties({"hibernateLazyInitializer"})
 // Lors de l'ajout de l'annotation au dessus, ca me retire mon erreur de proxy hibernate...(Voir dans la classe UserServiceImpl)
-@Table(name = "user")
-public class User implements Serializable{
+@Table(name = "account")
+public class Account implements Serializable{
 
 	/**
 	 * 
@@ -65,15 +65,15 @@ public class User implements Serializable{
 	private Integer phoneNumber;
 	
 	@JsonIgnore
-    @OneToOne(mappedBy = "user_fk")
+    @OneToOne(mappedBy = "account_fk")
     private Car car;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user_fk")
+    @OneToMany(mappedBy = "account_fk")
     private List<Trip> trips;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user_fk")
+    @OneToMany(mappedBy = "account_fk")
     private List<Booking> bookings;
 
     @JsonIgnore
@@ -85,7 +85,7 @@ public class User implements Serializable{
     private List<Message> receivedMessages;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user_fk")
+    @OneToMany(mappedBy = "account_fk")
     private List<Review> reviews;
 
     
@@ -222,7 +222,7 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Account other = (Account) obj;
 		return Objects.equals(birthday, other.birthday) && Objects.equals(email, other.email)
 				&& Objects.equals(firstname, other.firstname) && Objects.equals(id, other.id)
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)

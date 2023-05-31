@@ -1,5 +1,5 @@
 package com.roadbuddies.rbapi.dto;
 
-public class UserDTO {
+public class AccountDTO {
 
 }
