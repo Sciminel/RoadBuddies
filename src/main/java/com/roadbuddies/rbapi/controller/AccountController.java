@@ -19,15 +19,24 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public Account getUserById (@PathVariable Long id) {
+	public Account getAccountById (@PathVariable Long id) {
 		
 		return accountService.getAccountById(id);
 	}
 	
-	@PostMapping
-	public Account getUserByUsername (@RequestBody Account account) {
+	// Revoir comment appeler la methode qui permet de recup en BDD un user
+	@PostMapping(path = "/login")
+	public Account getAccountByUsername (@RequestBody Account account) {
 		System.out.println("Trouvé : " + account);
 		return accountService.findByUsername(account.getUsername());
+	}
+	
+	//
+	@PostMapping(path = "/signup")
+	public Account createAccount (@RequestBody Account account) {
+		
+		System.out.println("Trouvé : " + account);
+		return accountService.saveAccount(account);
 	}
 	
 }

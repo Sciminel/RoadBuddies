@@ -57,7 +57,6 @@ public class Account implements Serializable{
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@JsonIgnore
 	@NotNull
 	@Column(name = "password")
 	private String password;
