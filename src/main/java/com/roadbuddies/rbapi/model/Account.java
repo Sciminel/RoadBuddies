@@ -2,14 +2,20 @@ package com.roadbuddies.rbapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -44,11 +50,11 @@ public class Account implements Serializable{
 	private String lastname;
 	
 	@NotNull
-	@Column(name = "username")
+	@Column(name = "username", unique = true)
 	private String username;
 	
 	@NotNull
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@JsonIgnore
@@ -88,7 +94,13 @@ public class Account implements Serializable{
     @OneToMany(mappedBy = "account_fk")
     private List<Review> reviews;
 
-    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    		name = "account_roles",
+    		joinColumns = @JoinColumn(name = "account_id"),
+    		inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
     
 	public Long getId() {
 		return id;

@@ -41,6 +41,12 @@ public class AccountServiceImpl implements AccountService{
 		// TODO Auto-generated method stub
 		accountRepository.deleteById(id);
 	}
+
+	@Override
+	public Account findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return accountRepository.findByUsername(username);
+	}
 	
 	
 	

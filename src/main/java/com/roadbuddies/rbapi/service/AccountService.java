@@ -8,4 +8,5 @@ public interface AccountService {
 	Account saveAccount(Account user);
 	Account updateAccount(Account user, Long id);
 	void deleteAccount(Long id);
+	Account findByUsername(String username);
 }

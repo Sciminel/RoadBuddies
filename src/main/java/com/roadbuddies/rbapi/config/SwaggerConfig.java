@@ -1,5 +1,6 @@
 package com.roadbuddies.rbapi.config;
 
+
 public class SwaggerConfig {
 
 	

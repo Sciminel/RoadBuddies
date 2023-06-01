@@ -3,6 +3,8 @@ package com.roadbuddies.rbapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,17 +12,22 @@ import com.roadbuddies.rbapi.model.Account;
 import com.roadbuddies.rbapi.service.AccountService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/account")
 public class AccountController {
 
 	@Autowired
-	private AccountService userService;
+	private AccountService accountService;
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
 	public Account getUserById (@PathVariable Long id) {
 		
-		return userService.getAccountById(id);
+		return accountService.getAccountById(id);
 	}
 	
+	@PostMapping
+	public Account getUserByUsername (@RequestBody Account account) {
+		System.out.println("Trouvé : " + account);
+		return accountService.findByUsername(account.getUsername());
+	}
 	
 }
