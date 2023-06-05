@@ -7,21 +7,22 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -41,31 +42,32 @@ public class Account implements Serializable{
 	@JsonIgnore
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "firstname")
+    @Schema(description = "Prénom d'utilisateur", example = "johnDoe")
 	private String firstname;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "lastname")
 	private String lastname;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "username", unique = true)
 	private String username;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "password")
 	private String password;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "birthday")
 	private Date birthday;
 	
-	@NotNull
+	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "phone_number")
 	private Integer phoneNumber;
 	

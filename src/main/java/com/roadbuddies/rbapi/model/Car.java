@@ -3,17 +3,20 @@ package com.roadbuddies.rbapi.model;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.ForeignKey;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
+
+
 
 
 @Entity
@@ -44,7 +47,8 @@ public class Car {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_car"))
+	@JoinColumn(name = "account_fk", referencedColumnName = "id")
+	@ForeignKey(name = "fk_account_car")
 	private Account account_fk;
 	
 	public Long getId() {

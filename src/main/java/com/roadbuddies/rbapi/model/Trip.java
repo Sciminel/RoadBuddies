@@ -4,17 +4,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.ForeignKey;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "trip")
@@ -55,7 +57,8 @@ public class Trip {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "account_fk", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_account_trip"))
+	@JoinColumn(name = "account_fk", referencedColumnName = "id")
+	@ForeignKey(name = "fk_account_trip")
 	private Account account_fk;
 
 	public Long getId() {
