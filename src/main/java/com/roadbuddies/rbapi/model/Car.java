@@ -1,9 +1,12 @@
 package com.roadbuddies.rbapi.model;
 
 import java.util.Date;
-import java.util.Objects;
 
 import org.hibernate.annotations.ForeignKey;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +20,9 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 
 
-
-
 @Entity
 @Table(name = "car")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Car {
 
 	@Id
@@ -48,7 +50,7 @@ public class Car {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "account_fk", referencedColumnName = "id")
-	@ForeignKey(name = "fk_account_car")
+    @JsonIdentityReference(alwaysAsId = true)
 	private Account account_fk;
 	
 	public Long getId() {
@@ -84,11 +86,11 @@ public class Car {
 		this.year = year;
 	}
 
-	public Account getUser_fk() {
+	public Account getAccount_fk() {
 		return account_fk;
 	}
 
-	public void setUser_fk(Account user_fk) {
+	public void setAccount_fk(Account user_fk) {
 		this.account_fk = user_fk;
 	}
 
@@ -122,30 +124,6 @@ public class Car {
 		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", year=" + year + ", license=" + license
 				+ ", plate=" + plate + ", color=" + color + ", user_fk=" + account_fk + "]";
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(color, id, license, make, model, plate, year);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Car other = (Car) obj;
-		return Objects.equals(color, other.color) && Objects.equals(id, other.id)
-				&& Objects.equals(license, other.license) && Objects.equals(make, other.make)
-				&& Objects.equals(model, other.model) && Objects.equals(plate, other.plate)
-				&& Objects.equals(year, other.year);
-	}
-	
-	
-	
-	
 	
 	
 }

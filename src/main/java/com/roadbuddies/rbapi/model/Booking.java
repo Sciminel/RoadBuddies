@@ -5,6 +5,10 @@ import java.util.Objects;
 
 import org.hibernate.annotations.ForeignKey;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +22,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "booking")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Booking {
 
 	@Id
@@ -38,13 +43,13 @@ public class Booking {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "account_fk", referencedColumnName = "id")
-	@ForeignKey(name = "fk_account_booking")
+    @JsonIdentityReference(alwaysAsId = true)
 	private Account account_fk;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "trip_fk", referencedColumnName = "id")
-	@ForeignKey(name = "fk_trip_booking")
+    @JsonIdentityReference(alwaysAsId = true)
 	private Trip trip_fk;
 
 	public Long getId() {

@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,6 +30,7 @@ import jakarta.validation.constraints.NotNull;
 // @JsonIgnoreProperties({"hibernateLazyInitializer"})
 // Lors de l'ajout de l'annotation au dessus, ca me retire mon erreur de proxy hibernate...(Voir dans la classe UserServiceImpl)
 @Table(name = "account")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account implements Serializable{
 
 	/**
@@ -44,7 +46,6 @@ public class Account implements Serializable{
 	
 	@NotNull(message = "Ce champs ne peut pas être vide")
 	@Column(name = "firstname")
-    @Schema(description = "Prénom d'utilisateur", example = "johnDoe")
 	private String firstname;
 	
 	@NotNull(message = "Ce champs ne peut pas être vide")
@@ -71,28 +72,33 @@ public class Account implements Serializable{
 	@Column(name = "phone_number")
 	private Integer phoneNumber;
 	
-	@JsonIgnore
     @OneToOne(mappedBy = "account_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private Car car;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Trip> trips;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Booking> bookings;
 
     @JsonIgnore
     @OneToMany(mappedBy = "sender_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Message> sendMessages;
 
     @JsonIgnore
     @OneToMany(mappedBy = "recipient_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Message> receivedMessages;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Review> reviews;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -101,6 +107,7 @@ public class Account implements Serializable{
     		joinColumns = @JoinColumn(name = "account_id"),
     		inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Role> roles = new HashSet<>();
     
 	public Long getId() {
@@ -214,36 +221,23 @@ public class Account implements Serializable{
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
+		return "Account [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
 				+ ", email=" + email + ", password=" + password + ", birthday=" + birthday + ", phoneNumber="
-				+ phoneNumber + "]";
+				+ phoneNumber + ", car=" + car + ", trips=" + trips + ", bookings=" + bookings + ", sendMessages="
+				+ sendMessages + ", receivedMessages=" + receivedMessages + ", reviews=" + reviews + ", roles=" + roles
+				+ "]";
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(birthday, email, firstname, id, lastname, password, phoneNumber, username);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		return Objects.equals(birthday, other.birthday) && Objects.equals(email, other.email)
-				&& Objects.equals(firstname, other.firstname) && Objects.equals(id, other.id)
-				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && Objects.equals(username, other.username);
-	}
-	
-	
-	
 	
 	
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
+
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,15 +53,17 @@ public class Trip {
 	private Integer price;
 	
 	@OneToMany(mappedBy = "trip_fk")
+	@JsonIdentityReference(alwaysAsId = true)
 	private List<Booking> bookings;
 	
     @OneToMany(mappedBy = "trip_fk")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Review> reviews;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "account_fk", referencedColumnName = "id")
-	@ForeignKey(name = "fk_account_trip")
+    @JsonIdentityReference(alwaysAsId = true)
 	private Account account_fk;
 
 	public Long getId() {
